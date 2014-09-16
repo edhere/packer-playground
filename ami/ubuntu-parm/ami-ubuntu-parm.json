@@ -40,12 +40,6 @@
     	"type":"shell",
     	"script":"provisioners/zsh.sh"
     }
-    {
-      "type": "shell",
-      "inline": [
-        "sudo apt-get install -y redis-server"
-      ]
-    }
   ],
   "post-processors": [
     "vagrant"
