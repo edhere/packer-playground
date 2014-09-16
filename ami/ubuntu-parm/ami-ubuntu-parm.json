@@ -15,19 +15,19 @@
     "ami_name": "p2-example {{timestamp}}"
   }],
   "provisioners": [
-  	{
-  	  "type": "shell",
-  	  "inline": [
-  	    "sleep 30",
-  	    "sudo apt-get update",
-  	    "sudo apt-get upgrade -y",
+    {
+      "type": "shell",
+      "inline": [
+        "sleep 30",
+        "sudo apt-get --force-yes -y update",
+        "sudo apt-get --force-yes -y upgrade",
         "sudo apt-get --force-yes -y install build-essential openssl libreadline6 libreadline6-dev libcurl4-openssl-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison"
-  	  ]
-  	},
-  	{
-  	  "type":"shell",
-  	  "script":"provisioners/ruby.sh"
-  	},
+      ]
+    },
+    {
+      "type":"shell",
+      "script":"provisioners/ruby.sh"
+    },
     {
       "type":"shell",
       "script":"provisioners/mongodb.sh"
@@ -36,14 +36,18 @@
       "type":"shell",
       "script":"provisioners/nodejs.sh"
     },
-  	{
-  	  "type": "shell",
-  	  "inline": [
-  	    "sudo apt-get install -y redis-server"
-  	  ]
-  	}
+    {
+    	"type":"shell",
+    	"script":"provisioners/zsh.sh"
+    }
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get install -y redis-server"
+      ]
+    }
   ],
   "post-processors": [
-  	"vagrant"
+    "vagrant"
   ]
 }
