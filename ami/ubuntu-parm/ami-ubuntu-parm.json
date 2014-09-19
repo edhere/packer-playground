@@ -12,7 +12,7 @@
     "security_group_id": "sg-a7247bcf",
     "instance_type": "t1.micro",
     "ssh_username": "ubuntu",
-    "ami_name": "p2-example {{timestamp}}"
+    "ami_name": "ami-parm {{timestamp}}"
   }],
   "provisioners": [
     {
@@ -26,19 +26,17 @@
     },
     {
       "type":"shell",
-      "script":"provisioners/ruby.sh"
+      "scripts": [
+        "scripts/ruby.sh",
+        "scripts/nodejs.sh",
+        "scripts/mongodb.sh",
+        "scripts/zsh.sh",
+        "scripts/puppet.sh"
+      ]
     },
     {
-      "type":"shell",
-      "script":"provisioners/mongodb.sh"
-    },
-    {
-      "type":"shell",
-      "script":"provisioners/nodejs.sh"
-    },
-    {
-    	"type":"shell",
-    	"script":"provisioners/zsh.sh"
+      "type": "puppet-masterless",
+      "manifest_file": "puppet/manifests/default.pp"
     }
   ],
   "post-processors": [
