@@ -7,3 +7,4 @@ ruby -v
 gem install bundler
 gem install puma
 gem install rails -v 4.1.0 --no-ri --no-rdoc
+cd /home/ubuntu/ && rails new app
