@@ -5,6 +5,7 @@ class parm {
   file { "/home/ubuntu/app" :
 	ensure  => directory,
 	owner   => 'ubuntu',
+	group 	=> 'ubuntu'
   }
 
 }

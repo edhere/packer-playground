@@ -30,13 +30,15 @@
         "scripts/ruby.sh",
         "scripts/nodejs.sh",
         "scripts/mongodb.sh",
+        "scripts/jenkins.sh"
         "scripts/zsh.sh",
         "scripts/puppet.sh"
       ]
     },
     {
       "type": "puppet-masterless",
-      "manifest_file": "puppet/manifests/default.pp"
+      "manifest_file": "puppet/manifests/default.pp",
+      "manifest_dir": "puppet"
     }
   ],
   "post-processors": [
