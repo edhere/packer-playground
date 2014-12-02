@@ -12,7 +12,7 @@
     "security_group_id": "sg-dca6fbb6",
     "instance_type": "t1.micro",
     "ssh_username": "ubuntu",
-    "ami_name": "ami-parm {{timestamp}}"
+    "ami_name": "ami-sails {{timestamp}}"
   }],
   "provisioners": [
     {
