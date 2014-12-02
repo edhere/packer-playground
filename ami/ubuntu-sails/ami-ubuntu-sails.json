@@ -1,0 +1,46 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "us-east-1",
+    "source_ami": "ami-de0d9eb7",
+    "security_group_id": "sg-a7247bcf",
+    "instance_type": "t1.micro",
+    "ssh_username": "ubuntu",
+    "ami_name": "ami-parm {{timestamp}}"
+  }],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sleep 30",
+        "sudo apt-get --force-yes -y update",
+        "sudo apt-get --force-yes -y upgrade",
+        "sudo apt-get --force-yes -y install build-essential openssl libreadline6 libreadline6-dev libcurl4-openssl-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison"
+      ]
+    },
+    {
+      "type":"shell",
+      "scripts": [
+        "scripts/ruby.sh",
+        "scripts/nodejs.sh",
+        "scripts/mongodb.sh",
+        "scripts/zsh.sh",
+        "scripts/puppet.sh"
+      ]
+    },
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "puppet/manifests/default.pp",
+      "manifest_dir": "puppet"
+    }
+  ],
+  "post-processors": [
+    "vagrant"
+  ]
+}
